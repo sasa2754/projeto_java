@@ -1,0 +1,36 @@
+Services:
+	- UserService
+		- Login (Logar né, padrão, n esquece o jwt, o usuário vai poder logar com o email ou com o EDV)
+		- Register (Registrar precisa do name, email, EDV e senha)
+
+	- SpaceService
+		- Create (Criar um space, não podem ter espaços com o mesmo nome)
+		- Delete (Deletar um space)
+
+	- PermissionService
+		- ChangePermission (Coloca um enum no front para exibir duas opções: Admin ou common, pq dai o usuário não pode fazer merda e escrever batata na permissão)
+
+	- QuestionsService
+		- Create (Criar uma pergunta nova, precisa do nome do space)
+
+	- AnswerService
+		- Create (Cria uma resposta, precisa do id da question)
+
+Repositories:
+	- UserRepository
+		- FindByEmail
+		- FindbyEDV
+		- FindByEmailOrEDV (Query já pronta, só usa e seja feliz)
+
+	- SpaceRepository
+		- FindByName
+
+	- AnswerRepository
+		- getAnswerByQuestion(Pega todas as respostas de uma pergunta, precisa mandar o id da pergunta)
+
+
+
+Testes:
+	-TestPassword(se a senha tem no min 12 caracteres, tem letras maiúsculas e minúsculas e números)
+	- TestEmail(se o email tem formato de email, ex: aaaa@email.com)
+	- TestEDV(Opcional na vdd, só pra conferir se o EDV é só números, mas se quiser testar isso direto na implementação mesmo)
