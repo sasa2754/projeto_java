@@ -1,5 +1,6 @@
 package com.projeto.demo;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -24,7 +25,7 @@ public class Teste {
         assertFalse(UserImpl.checkPass("2345678909876543355"));
         assertFalse(UserImpl.checkPass("seraqessapassa123"));
 
-        assertTrue(UserImpl.checkPass("EssaPassaCerteza12345"));
+        assertTrue(UserImpl.checkPass("EssaPassaComCerteza12345"));
         assertTrue(UserImpl.checkPass("Essatbmpassa000"));
         assertTrue(UserImpl.checkPass("minhasenhamtfodaA876"));
     }
@@ -44,7 +45,7 @@ public class Teste {
         assertTrue(UserImpl.checkEmail("essePassa123@email.com"));
     }
 
-    // Só pra conferir se ele tem número ou não
+    // Só pra conferir se ele tem só números ou não
     @Test
     public void TestEDV() {
         assertFalse(UserImpl.cheackEDV("aaaaaaaa"));
