@@ -29,7 +29,7 @@ public class UserImpl implements UserService {
         user.setPassword(pass);
         repo.saveAndFlush(user);
 
-        return new ResponseEntity<Object>("Usuário criado com sucesso!", HttpStatus.OK);
+        return new ResponseEntity<>("Usuário criado com sucesso!", HttpStatus.OK);
     }
 
     @Override
@@ -49,6 +49,6 @@ public class UserImpl implements UserService {
         //     return null;
         // }
 
-        return new ResponseEntity<Object>("Logado com sucesso!", HttpStatus.OK);
+        return new ResponseEntity<>("Logado com sucesso!", HttpStatus.OK);
     }
 }

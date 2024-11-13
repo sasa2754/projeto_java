@@ -26,6 +26,7 @@ public class WebConfig {
           .csrf(csrf -> csrf.disable())
           .authorizeHttpRequests(authorize -> authorize
           .requestMatchers("/user").permitAll()
+          .requestMatchers("/auth").permitAll()
           .requestMatchers("/**").authenticated()
           )
           .addFilterBefore(new JwtInterceptor(jwt), UsernamePasswordAuthenticationFilter.class)

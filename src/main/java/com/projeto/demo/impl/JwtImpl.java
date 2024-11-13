@@ -12,7 +12,7 @@ import com.projeto.demo.services.JWTService;
 public class JwtImpl implements  JWTService{
 
     @Override
-    public String generateJWT(Long id, String name) {
+    public String generateJWT(Long id) {
 
       return JWT.create()
       .withSubject(id.toString()) // Define o identificador, nesse caso o username
