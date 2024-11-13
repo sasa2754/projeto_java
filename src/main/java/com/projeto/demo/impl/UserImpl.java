@@ -2,7 +2,6 @@ package com.projeto.demo.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
 import com.projeto.demo.repositories.UserRepository;
