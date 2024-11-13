@@ -1,3 +1,5 @@
+😊BEM-VINDO PESSOAS!😊
+
 Services:
 	- UserService
 		- Login (Logar né, padrão, n esquece o jwt, o usuário vai poder logar com o email ou com o EDV)
@@ -93,7 +95,7 @@ JWT:
 	import org.springframework.web.servlet.HandlerInterceptor;
 
 	import com.auth0.jwt.exceptions.JWTVerificationException;
-	import com.example.demo.JwtExample;
+	import com.example.demo.JwtCreate;
 
 	import jakarta.servlet.http.HttpServletRequest;
 	import jakarta.servlet.http.HttpServletResponse;
@@ -115,7 +117,7 @@ JWT:
 								.trim();
 
 			try {
-				var decoded = JwtExample.validateToken(authorization); // Chama a função validateToken
+				var decoded = JwtCreate.validateToken(authorization); // Chama a função validateToken
 
 				request.setAttribute("username", decoded.getSubject()); // Pega o username do dono do token
 				request.setAttribute("id", decoded.getClaim("id")); // Pega o claim ID, mas pode ser qualquer outro que você quiser colocar
@@ -129,6 +131,31 @@ JWT:
 			}
 		}
 
+	}
+
+	==========================================
+
+	Também vou deixar aqui o código de como configurar o middleware pela maneira como eu tinha feito anteriormente, sinta-se a vontade para modificar se for necessário!
+
+	==Código de como configurar o middleware==
+
+	package com.example.demo;
+
+	import org.springframework.context.annotation.Configuration;
+	import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+	import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+	import com.example.demo.interceptor.JwtInterceptor;
+
+	@Configuration
+	public class WebConfig implements WebMvcConfigurer {
+		@Override
+		public void addInterceptors(InterceptorRegistry registry) {
+			registry.addInterceptor(new JwtInterceptor())
+					.addPathPatterns("/**")
+					.excludePathPatterns("/loginToken/**") // Coloque aqui todas as rotas que não forem necessário a validação do token
+					.excludePathPatterns("/userBcrypt/**"); // Aqui tbm
+		}
 	}
 
 	==========================================
