@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.projeto.demo.repositories.UserRepository;
+import com.projeto.demo.services.JWTService;
 import com.projeto.demo.services.UserService;
+import com.projeto.demo.dto.TokenData;
 import com.projeto.demo.model.User;
 
 public class UserImpl implements UserService {
@@ -13,20 +15,59 @@ public class UserImpl implements UserService {
     @Autowired
     UserRepository repo;
 
+    @Autowired
+    BcryptImpl service;
+
+    @Autowired
+    JWTService jwtService;
+
     @Override
     public ResponseEntity<Object> register(String name, String email, String EDV, String pass) {
         var validEmail = repo.findByEmail(email);
         var validEdv = repo.findByEDV(EDV);
 
+        Boolean letterUp = false;
+        Boolean number = false;
+        Boolean letter = false;
+        
         if(!validEmail.isEmpty() || !validEdv.isEmpty()) {
-            return null;
+            return new ResponseEntity<Object>("Usuário inválido", HttpStatus.OK);
+        }
+        
+        if(pass.length() < 12) {
+            return new ResponseEntity<Object>("A senha deve possuir mais de 12 caracteres.", HttpStatus.OK);
+        }
+
+        //verifica se a senha possui número, letra maiúscula e minúscula
+        for (char c : pass.toCharArray()) {
+            if(Character.isDigit(c))
+                number = true;
+            else if(Character.isLowerCase(c))
+                letter = true;
+            else if(Character.isUpperCase(c))
+                letterUp = true;
+            else {
+                return new ResponseEntity<Object>("A senha não deve possuir caracteres especiais.", HttpStatus.OK);
+            }
+        }
+        
+        if(!number) {
+            return new ResponseEntity<Object>("A senha deve possuir números.", HttpStatus.OK);
+        }
+        
+        if(!letter) {
+            return new ResponseEntity<Object>("A senha deve possuir letras minúsculas.", HttpStatus.OK);
+        }
+        
+        if(!letterUp) {
+            return new ResponseEntity<Object>("A senha deve possuir letras maiúsculas.", HttpStatus.OK);
         }
 
         var user = new User();
         user.setName(name);
         user.setEDV(EDV);
         user.setEmail(email);
-        user.setPassword(pass);
+        user.setPassword(service.encode(pass));
         repo.saveAndFlush(user);
 
         return new ResponseEntity<>("Usuário criado com sucesso!", HttpStatus.OK);
@@ -40,15 +81,17 @@ public class UserImpl implements UserService {
             user = repo.findByEDV(EDV);
 
             if(user.isEmpty()) {
-                return null;
+                return new ResponseEntity<>(new TokenData("Dados inválidos", ""), HttpStatus.OK);
             }
         }
 
         //verificação de senha
-        // if() {
-        //     return null;
-        // }
+        if(!service.math(pass, user.get(0).getPassword())) {
+            return new ResponseEntity<>(new TokenData("Senha incorreta", ""), HttpStatus.OK);
+        }
 
-        return new ResponseEntity<>("Logado com sucesso!", HttpStatus.OK);
+        var token = jwtService.generateJWT(user.get(0).getId(), pass);
+
+        return new ResponseEntity<>(new TokenData("Logado com sucesso", token), HttpStatus.OK);
     }
 }

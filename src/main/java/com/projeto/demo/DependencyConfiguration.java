@@ -4,12 +4,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.projeto.demo.impl.JwtImpl;
+import com.projeto.demo.impl.UserImpl;
 import com.projeto.demo.services.JWTService;
+import com.projeto.demo.services.UserService;
 
 @Configuration
 public class DependencyConfiguration {
     @Bean
     public JWTService jwtService(){
       return new JwtImpl();
+    }
+
+    @Bean
+    public UserService userService() {
+      return new UserImpl();
     }
 }
