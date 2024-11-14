@@ -6,11 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import com.projeto.demo.impl.AnswerImpl;
 import com.projeto.demo.impl.BcryptImpl;
 import com.projeto.demo.impl.JwtImpl;
+import com.projeto.demo.impl.PermissionImpl;
 import com.projeto.demo.impl.QuestionImpl;
 import com.projeto.demo.impl.UserImpl;
 import com.projeto.demo.services.AnswerService;
 import com.projeto.demo.services.BcryptService;
 import com.projeto.demo.services.JWTService;
+import com.projeto.demo.services.PermissionService;
 import com.projeto.demo.services.QuestionService;
 import com.projeto.demo.services.UserService;
 
@@ -39,5 +41,10 @@ public class DependencyConfiguration {
     @Bean
     public BcryptService bcryptService() {
       return new BcryptImpl();
+    }
+
+    @Bean
+    public PermissionService permissionService() {
+      return new PermissionImpl();
     }
 }
