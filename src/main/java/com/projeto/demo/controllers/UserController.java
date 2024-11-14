@@ -19,7 +19,7 @@ import com.projeto.demo.repositories.UserRepository;
 import com.projeto.demo.services.UserService;
 
 @RestController
-@RequestMapping("")
+@RequestMapping
 public class UserController {
     
     @Autowired
@@ -39,14 +39,14 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<UsersReturn>> getUsers(String query,Integer page,Integer size){ //Query vai ser tudo depois do WHERE Exemplo email="Juan@email.com" PAge comeca em 1
+    public ResponseEntity<List<UsersReturn>> getUsers(String edv,Integer page,Integer size){ //Query vai ser tudo depois do WHERE Exemplo EDV=Juan@email.com || PAge comeca em 1
         
     List<User> users;
     ArrayList<UsersReturn> newlList = new ArrayList<>();
 
 
-    if(query!=null){
-        users = repo.findByQuery(query);
+    if(edv!=null){
+        users = repo.findByQuery(edv);
     }else{
         users = repo.findAll();
     }

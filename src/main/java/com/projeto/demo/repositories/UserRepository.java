@@ -22,6 +22,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
     ///Grupo 2: 
-    @Query("SELECT U FROM User u WHERE :query")
+    @Query("SELECT u FROM User u WHERE EDV = :query")
     List<User> findByQuery(@Param("query") String query);
 }
