@@ -6,4 +6,5 @@ import com.projeto.demo.model.Permissions;
 
 /////CRIADO PELO GRUPO 2
 
-public interface PermissionRepo extends JpaRepository<Permissions, Long>{}
+public interface PermissionRepo extends JpaRepository<Permissions, Long>{
+}

@@ -7,11 +7,13 @@ import com.projeto.demo.impl.AnswerImpl;
 import com.projeto.demo.impl.BcryptImpl;
 import com.projeto.demo.impl.JwtImpl;
 import com.projeto.demo.impl.QuestionImpl;
+import com.projeto.demo.impl.SpaceImpl;
 import com.projeto.demo.impl.UserImpl;
 import com.projeto.demo.services.AnswerService;
 import com.projeto.demo.services.BcryptService;
 import com.projeto.demo.services.JWTService;
 import com.projeto.demo.services.QuestionService;
+import com.projeto.demo.services.SpaceService;
 import com.projeto.demo.services.UserService;
 
 @Configuration
@@ -39,5 +41,10 @@ public class DependencyConfiguration {
     @Bean
     public BcryptService bcryptService() {
       return new BcryptImpl();
+    }
+
+    @Bean
+    public SpaceService spaceService(){
+      return new SpaceImpl();
     }
 }
