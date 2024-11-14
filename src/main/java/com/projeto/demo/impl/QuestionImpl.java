@@ -23,10 +23,10 @@ public class QuestionImpl implements QuestionService {
     UserRepository userRepo;
 
     @Override
-    public ResponseEntity<Object> create(String nameSpace, String text, String idUser) {
+    public ResponseEntity<Object> create(String nameSpace, String text, Long idUser) {
 
         var space = spaceRepo.findByName(nameSpace);
-        var userId = userRepo.findById(user.getId());
+        var user = userRepo.findById(idUser);
         
         //verifica se existe uma pergunta
         if(text == null) {
@@ -39,14 +39,14 @@ public class QuestionImpl implements QuestionService {
         }
 
         //se a pesquisa por usuário não retornar resultado
-        if(userId.isEmpty()) {
+        if(user.isEmpty()) {
             return new ResponseEntity<>("Usuário inválido!", HttpStatus.OK);
         }
 
         var question = new Questions();
         question.setDescription(text);
         question.setSpace(space.get(0));
-        question.setUser(user);
+        question.setUser(user.get());
         questionRepo.saveAndFlush(question);
 
         return new ResponseEntity<>("Pergunda criada com sucesso!", HttpStatus.OK);

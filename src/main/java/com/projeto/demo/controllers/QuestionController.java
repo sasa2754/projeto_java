@@ -32,8 +32,11 @@ public class QuestionController {
         if(token == null) {
             return new ResponseEntity<Object>("Token inválido!", HttpStatus.OK);
         }
+
+        //converte string em long
+        Long idUser = Long.parseLong(token);
         
-        return questionService.create(data.nameSpace(), data.text(), token);
+        return questionService.create(data.nameSpace(), data.text(), idUser);
     }
 
     @DeleteMapping("/question/{id}")
