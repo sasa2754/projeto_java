@@ -24,11 +24,9 @@ public class UserController {
     public ResponseEntity<Object> register(@RequestBody UserData data) {
         return userService.register(data.name(), data.email(), data.EDV(), data.password());
     }
-
+    
     @PostMapping("/auth")
     public ResponseEntity<Object> login(@RequestBody UserData data) {
         return userService.login(data.email(), data.EDV(), data.password());
     }
-
-
 }

@@ -30,6 +30,7 @@ public class UserImpl implements UserService {
         Boolean number = false;
         Boolean letter = false;
         
+        //caso não ache nenhum user que corresponde, vai retornar null
         if(!validEmail.isEmpty() || !validEdv.isEmpty()) {
             return new ResponseEntity<Object>("Usuário inválido", HttpStatus.OK);
         }
@@ -90,7 +91,8 @@ public class UserImpl implements UserService {
             return new ResponseEntity<>(new TokenData("Senha incorreta", ""), HttpStatus.OK);
         }
 
-        var token = jwtService.generateJWT(user.get(0).getId(), pass);
+        //chama o service para gerar o token de usuário
+        var token = jwtService.generateJWT(user.get(0).getId());
 
         return new ResponseEntity<>(new TokenData("Logado com sucesso", token), HttpStatus.OK);
     }
