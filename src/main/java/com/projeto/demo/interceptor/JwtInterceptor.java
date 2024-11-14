@@ -31,7 +31,7 @@ public class JwtInterceptor extends OncePerRequestFilter{
             return;
         }
 
-        var token = JwtTokenService.validateJWT(jwt);
+        var token = JwtTokenService.validateJWT(jwt).getClaims();
         if (token == null)
         {
             filterChain.doFilter(request, response);
@@ -41,7 +41,7 @@ public class JwtInterceptor extends OncePerRequestFilter{
         var authentication = new UsernamePasswordAuthenticationToken("jao", null, null);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        request.setAttribute("token", token);
+        request.setAttribute("token", token.get("id"));
         filterChain.doFilter(request, response);
     }
 

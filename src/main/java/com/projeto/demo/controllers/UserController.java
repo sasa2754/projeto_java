@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<UsersReturn>> getUsers(String edv,Integer page,Integer size){ //Query vai ser tudo depois do WHERE Exemplo EDV=Juan@email.com || PAge comeca em 1
+    public ResponseEntity<List<UsersReturn>> getUsers(String edv,Integer page,Integer size){ //|| PAge comeca em 1
         
     List<User> users;
     ArrayList<UsersReturn> newlList = new ArrayList<>();
