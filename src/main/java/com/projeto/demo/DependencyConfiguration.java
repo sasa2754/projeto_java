@@ -50,6 +50,7 @@ public class DependencyConfiguration {
       return new SpaceImpl();
     }
     
+    @Bean
     public PermissionService permissionService() {
       return new PermissionImpl();
     }
