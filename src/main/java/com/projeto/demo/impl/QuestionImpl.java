@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.projeto.demo.model.Questions;
-import com.projeto.demo.model.User;
 import com.projeto.demo.repositories.QuestionRepository;
 import com.projeto.demo.repositories.SpaceRepository;
 import com.projeto.demo.repositories.UserRepository;
