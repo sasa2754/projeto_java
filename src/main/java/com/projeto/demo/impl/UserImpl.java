@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import com.projeto.demo.dto.TokenData;
 import com.projeto.demo.model.User;
 import com.projeto.demo.repositories.UserRepository;
+import com.projeto.demo.services.BcryptService;
 import com.projeto.demo.services.JWTService;
 import com.projeto.demo.services.UserService;
 
@@ -16,7 +17,7 @@ public class UserImpl implements UserService {
     UserRepository repo;
 
     @Autowired
-    BcryptImpl service;
+    BcryptService service;
 
     @Autowired
     JWTService jwtService;
