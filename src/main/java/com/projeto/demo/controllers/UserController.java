@@ -51,8 +51,9 @@ public class UserController {
         users = repo.findAll();
     }
 
+    //paginação
     int start = size * (page-1);
-    int sizeReal = start + page-1;
+    int sizeReal = start + size-1;
 
     if(page<1 || size<1){
         start = 0;

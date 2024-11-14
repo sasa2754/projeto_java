@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,8 +27,13 @@ public class QuestionController {
     QuestionRepository questionRepo;
 
     @PostMapping("/question")
-    public ResponseEntity<Object> createQuestion(@RequestBody QuestionData data) {
-        return questionService.create(data.nameSpace(), data.text());
+    public ResponseEntity<Object> createQuestion(@RequestAttribute("token") String token, @RequestBody QuestionData data) {
+        
+        if(token == null) {
+            return new ResponseEntity<Object>("Token inválido!", HttpStatus.OK);
+        }
+        
+        return questionService.create(data.nameSpace(), data.text(), token);
     }
 
     @DeleteMapping("/question/{id}")
