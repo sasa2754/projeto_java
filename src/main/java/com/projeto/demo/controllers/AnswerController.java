@@ -11,7 +11,7 @@ import com.projeto.demo.dto.AnswerData;
 import com.projeto.demo.services.AnswerService;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/space")
 public class AnswerController {
 
     @Autowired
