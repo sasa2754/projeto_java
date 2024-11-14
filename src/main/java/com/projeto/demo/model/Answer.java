@@ -49,5 +49,15 @@ public class Answer {
         this.user = user;
     }
 
-    
+
+    //grupo 2
+    private String answer;
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }
